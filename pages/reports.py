@@ -1,0 +1,208 @@
+"""Reports page — generate and download HTML report."""
+from dash import html, dcc, Input, Output, State
+import dash_bootstrap_components as dbc
+import pandas as pd
+
+from services.metrics import (
+    kpi_summary, period_comparison, revenue_by_category,
+    revenue_by_region, top_products, format_currency, format_pct,
+    executive_summary
+)
+
+
+def layout() -> html.Div:
+    return html.Div([
+        dbc.Row([
+            dbc.Col(dbc.Button(
+                [html.I(className="bi bi-file-earmark-arrow-down me-2"), "Generate Report"],
+                id="report-gen-btn", color="primary",
+                style={"background": "var(--accent)", "border": "none", "color": "#0B1020",
+                       "fontWeight": "600", "borderRadius": "10px"},
+                n_clicks=0,
+            ), width="auto"),
+            dbc.Col(dbc.Button(
+                [html.I(className="bi bi-filetype-csv me-2"), "Download CSV"],
+                id="report-csv-btn", color="link",
+                className="text-accent", n_clicks=0,
+            ), width="auto"),
+            dbc.Col(dbc.Button(
+                [html.I(className="bi bi-filetype-html me-2"), "Download HTML Report"],
+                id="report-html-btn", color="link",
+                className="text-accent2", n_clicks=0,
+            ), width="auto"),
+        ], className="g-2 mb-4 align-items-center"),
+
+        dcc.Download(id="report-csv-dl"),
+        dcc.Download(id="report-html-dl"),
+
+        html.Div(id="report-preview"),
+    ], className="page-content")
+
+
+def _build_html_report(df: pd.DataFrame, start: str, end: str) -> str:
+    comp = period_comparison(df, start, end)
+    cur = comp["current"]
+    pct = comp.get("pct_change") or {}
+    summary = executive_summary(df, comp)
+    cats = revenue_by_category(df)
+    regs = revenue_by_region(df)
+    top = top_products(df, 10)
+
+    cat_rows = "".join(
+        f"<tr><td>{r['category']}</td><td>${r['revenue']:,.2f}</td>"
+        f"<td>{r['revenue']/cur['revenue']*100:.1f}%</td></tr>"
+        for _, r in cats.iterrows()
+    )
+    prod_rows = "".join(
+        f"<tr><td>{r['product']}</td><td>${r['revenue']:,.2f}</td></tr>"
+        for _, r in top.iterrows()
+    )
+
+    margin_row = (
+        f"<tr><td>Profit Margin</td><td>{cur['margin']:.1f}%</td></tr>"
+        if cur.get("margin") is not None else ""
+    )
+    profit_row = (
+        f"<tr><td>Gross Profit</td><td>{format_currency(cur['profit'])}</td></tr>"
+        if cur.get("profit") is not None else ""
+    )
+
+    return f"""<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>VELORA AI Report — {start} to {end}</title>
+<style>
+  body {{ font-family: Inter, system-ui, sans-serif; background: #0B1020; color: #F8FAFC;
+          margin: 0; padding: 40px; }}
+  h1 {{ color: #2DD4BF; font-size: 28px; border-bottom: 2px solid #263449; padding-bottom: 12px; }}
+  h2 {{ color: #818CF8; font-size: 18px; margin-top: 32px; }}
+  .kpi-grid {{ display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 20px 0; }}
+  .kpi {{ background: #121A2B; border: 1px solid #263449; border-radius: 10px; padding: 16px; }}
+  .kpi-val {{ font-size: 24px; font-weight: 700; color: #2DD4BF; }}
+  .kpi-lbl {{ font-size: 12px; color: #94A3B8; text-transform: uppercase; margin-bottom: 6px; }}
+  table {{ width: 100%; border-collapse: collapse; margin-top: 12px; }}
+  th {{ background: #182338; color: #94A3B8; padding: 8px 12px; text-align: left;
+        font-size: 12px; text-transform: uppercase; }}
+  td {{ padding: 8px 12px; border-bottom: 1px solid #263449; font-size: 13px; }}
+  .summary {{ background: #182338; border-left: 3px solid #2DD4BF; padding: 14px 18px;
+               border-radius: 8px; line-height: 1.7; color: #94A3B8; }}
+  .summary b {{ color: #F8FAFC; }}
+  .footer {{ margin-top: 40px; color: #263449; font-size: 12px; text-align: center; }}
+</style>
+</head>
+<body>
+<h1>VELORA AI — Performance Report</h1>
+<p style="color:#94A3B8">Period: {start} to {end}</p>
+<h2>Key Metrics</h2>
+<div class="kpi-grid">
+  <div class="kpi"><div class="kpi-lbl">Total Revenue</div>
+    <div class="kpi-val">{format_currency(cur['revenue'])}</div></div>
+  <div class="kpi"><div class="kpi-lbl">Total Orders</div>
+    <div class="kpi-val">{cur['orders']:,}</div></div>
+  <div class="kpi"><div class="kpi-lbl">Avg Order Value</div>
+    <div class="kpi-val">{format_currency(cur['aov'])}</div></div>
+</div>
+<table>
+  <tr><td>Revenue</td><td>{format_currency(cur['revenue'])}</td></tr>
+  {profit_row}
+  {margin_row}
+  <tr><td>Total Orders</td><td>{cur['orders']:,}</td></tr>
+  <tr><td>Avg Order Value</td><td>{format_currency(cur['aov'])}</td></tr>
+</table>
+<h2>Executive Summary</h2>
+<div class="summary">{summary.replace("**","<b>").replace("**","</b>")}</div>
+<h2>Revenue by Category</h2>
+<table><tr><th>Category</th><th>Revenue</th><th>Share</th></tr>{cat_rows}</table>
+<h2>Top Products</h2>
+<table><tr><th>Product</th><th>Revenue</th></tr>{prod_rows}</table>
+<div class="footer">Generated by VELORA AI · Intelligence Beyond Data</div>
+</body></html>"""
+
+
+def register_callbacks(app, get_df):
+    @app.callback(
+        Output("report-preview", "children"),
+        Input("report-gen-btn", "n_clicks"),
+        State("date-range-picker", "start_date"),
+        State("date-range-picker", "end_date"),
+        prevent_initial_call=True,
+    )
+    def generate_preview(n, start, end):
+        if not n or not start or not end:
+            return []
+        df = get_df()
+        filt = df[(df["order_date"] >= start) & (df["order_date"] <= end)]
+        comp = period_comparison(df, start, end)
+        cur = comp["current"]
+        pct = comp.get("pct_change") or {}
+        cats = revenue_by_category(filt).head(5)
+        top = top_products(filt, 5)
+        summary = executive_summary(filt, comp)
+
+        return html.Div([
+            html.H5("Report Preview", className="section-header mt-2"),
+            dbc.Row([
+                dbc.Col(html.Div([
+                    html.P("Revenue", className="kpi-title"),
+                    html.H4(format_currency(cur["revenue"]), className="text-accent"),
+                ], className="velora-card text-center"), md=3),
+                dbc.Col(html.Div([
+                    html.P("Orders", className="kpi-title"),
+                    html.H4(f"{cur['orders']:,}", className="text-accent"),
+                ], className="velora-card text-center"), md=3),
+                dbc.Col(html.Div([
+                    html.P("Avg Order Value", className="kpi-title"),
+                    html.H4(format_currency(cur["aov"]), className="text-accent"),
+                ], className="velora-card text-center"), md=3),
+                dbc.Col(html.Div([
+                    html.P("Period", className="kpi-title"),
+                    html.H6(f"{start[:10]} → {end[:10]}", className="text-accent2"),
+                ], className="velora-card text-center"), md=3),
+            ], className="g-3 mb-3"),
+            html.Div([
+                html.P("Executive Summary", className="card-title"),
+                dcc.Markdown(summary, className="executive-summary"),
+            ], className="velora-card mb-3"),
+            dbc.Row([
+                dbc.Col(html.Div([
+                    html.P("Top Categories", className="card-title"),
+                    dbc.Table.from_dataframe(
+                        cats.assign(revenue=cats["revenue"].map(lambda x: f"${x:,.2f}")),
+                        striped=False, hover=True, bordered=False, className="velora-table",
+                    ),
+                ], className="velora-card"), md=6),
+                dbc.Col(html.Div([
+                    html.P("Top Products", className="card-title"),
+                    dbc.Table.from_dataframe(
+                        top.assign(revenue=top["revenue"].map(lambda x: f"${x:,.2f}")),
+                        striped=False, hover=True, bordered=False, className="velora-table",
+                    ),
+                ], className="velora-card"), md=6),
+            ], className="g-3"),
+        ])
+
+    @app.callback(
+        Output("report-csv-dl", "data"),
+        Input("report-csv-btn", "n_clicks"),
+        State("date-range-picker", "start_date"),
+        State("date-range-picker", "end_date"),
+        prevent_initial_call=True,
+    )
+    def dl_csv(n, start, end):
+        df = get_df()
+        filt = df[(df["order_date"] >= start) & (df["order_date"] <= end)]
+        return dcc.send_data_frame(filt.to_csv, "velora_report_data.csv", index=False)
+
+    @app.callback(
+        Output("report-html-dl", "data"),
+        Input("report-html-btn", "n_clicks"),
+        State("date-range-picker", "start_date"),
+        State("date-range-picker", "end_date"),
+        prevent_initial_call=True,
+    )
+    def dl_html(n, start, end):
+        df = get_df()
+        filt = df[(df["order_date"] >= start) & (df["order_date"] <= end)]
+        html_str = _build_html_report(filt, start[:10], end[:10])
+        return dict(content=html_str, filename="velora_report.html", type="text/html")
