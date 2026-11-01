@@ -1,13 +1,16 @@
-# Core web framework
+# Core web framework (pure Python — exact pins)
 dash==2.17.1
 dash-bootstrap-components==1.6.0
 Flask==3.0.3
 gunicorn==22.0.0
 
-# Data & ML
-pandas==2.2.2
-numpy==1.26.4
-scikit-learn==1.5.0
+# Data & ML — ranges allow pip to pick wheels for the active Python version.
+# pandas>=2.2.3 fixes numpy 2.x ABI compatibility.
+# numpy>=2.0.0 has pre-built wheels for Python 3.10-3.14.
+# scikit-learn>=1.6.0 supports numpy 2.x and Python 3.13/3.14.
+pandas>=2.2.3,<3.0
+numpy>=2.0.0,<3.0
+scikit-learn>=1.6.0,<2.0
 openpyxl==3.1.2
 
 # Visualization
@@ -21,5 +24,5 @@ openai>=1.0.0
 python-dotenv==1.0.1
 reportlab==4.2.2
 
-# Development / testing (not needed on Render but harmless)
+# Testing
 pytest==8.2.2
