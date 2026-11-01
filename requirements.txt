@@ -1,14 +1,25 @@
-anthropic>=0.30.0
-openai>=1.0.0
+# Core web framework
 dash==2.17.1
-openpyxl==3.1.2
 dash-bootstrap-components==1.6.0
-plotly==5.22.0
+Flask==3.0.3
+gunicorn==22.0.0
+
+# Data & ML
 pandas==2.2.2
 numpy==1.26.4
 scikit-learn==1.5.0
+openpyxl==3.1.2
+
+# Visualization
+plotly==5.22.0
+
+# AI providers (both optional — app runs in Demo mode without keys)
+anthropic>=0.30.0
+openai>=1.0.0
+
+# Utilities
 python-dotenv==1.0.1
-Flask==3.0.3
-gunicorn==22.0.0
-pytest==8.2.2
 reportlab==4.2.2
+
+# Development / testing (not needed on Render but harmless)
+pytest==8.2.2
