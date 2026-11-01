@@ -1,12 +1,26 @@
+# Virtual environments
 .venv/
+venv/
+env/
+
+# Python
 __pycache__/
 *.pyc
 *.pyo
-.env
-.DS_Store
 *.egg-info/
+
+# Environment variables — NEVER commit real keys
+.env
+.env.*
+!.env.example
+
+# Build / test artifacts
 dist/
 build/
 .pytest_cache/
 .coverage
 htmlcov/
+
+# OS
+.DS_Store
+Thumbs.db

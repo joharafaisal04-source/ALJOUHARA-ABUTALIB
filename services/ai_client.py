@@ -146,12 +146,16 @@ def ask(question: str, df: pd.DataFrame, history: list[dict]) -> tuple[str, bool
 
     try:
         if OPENAI_KEY and not OPENAI_KEY.startswith("your_"):
-            import openai
-            client = openai.OpenAI(api_key=OPENAI_KEY)
-            resp = client.chat.completions.create(
-                model="gpt-4o-mini", messages=messages, max_tokens=600, timeout=20
-            )
-            return resp.choices[0].message.content, False
+            try:
+                import openai
+            except ImportError:
+                pass
+            else:
+                client = openai.OpenAI(api_key=OPENAI_KEY)
+                resp = client.chat.completions.create(
+                    model="gpt-4o-mini", messages=messages, max_tokens=600, timeout=20
+                )
+                return resp.choices[0].message.content, False
 
         if ANTHROPIC_KEY and not ANTHROPIC_KEY.startswith("your_"):
             import anthropic

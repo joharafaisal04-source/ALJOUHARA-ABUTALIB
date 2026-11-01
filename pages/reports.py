@@ -1,7 +1,11 @@
 """Reports page — generate and download HTML report."""
+import re
 from dash import html, dcc, Input, Output, State
 import dash_bootstrap_components as dbc
 import pandas as pd
+
+def _md_bold_to_html(text: str) -> str:
+    return re.sub(r'\*\*(.+?)\*\*', r'<b>\1</b>', text)
 
 from services.metrics import (
     kpi_summary, period_comparison, revenue_by_category,
@@ -111,7 +115,7 @@ def _build_html_report(df: pd.DataFrame, start: str, end: str) -> str:
   <tr><td>Avg Order Value</td><td>{format_currency(cur['aov'])}</td></tr>
 </table>
 <h2>Executive Summary</h2>
-<div class="summary">{summary.replace("**","<b>").replace("**","</b>")}</div>
+<div class="summary">{_md_bold_to_html(summary)}</div>
 <h2>Revenue by Category</h2>
 <table><tr><th>Category</th><th>Revenue</th><th>Share</th></tr>{cat_rows}</table>
 <h2>Top Products</h2>
