@@ -11,7 +11,8 @@ from config import REQUIRED_COLUMNS, OPTIONAL_COLUMNS, SAMPLE_DATA_PATH
 
 def load_sample_data() -> pd.DataFrame:
     """Load the bundled sample dataset."""
-    df = pd.read_csv(SAMPLE_DATA_PATH, parse_dates=["order_date"])
+    df = pd.read_csv(SAMPLE_DATA_PATH)
+    df["order_date"] = pd.to_datetime(df["order_date"])
     return df
 
 
