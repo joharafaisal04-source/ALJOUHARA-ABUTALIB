@@ -67,8 +67,8 @@ def period_comparison(
     return {"current": cur, "previous": prev, "pct_change": pct}
 
 
-def revenue_by_period(df: pd.DataFrame, freq: str = "M") -> pd.DataFrame:
-    """Aggregate revenue by time period. freq: D/W/M"""
+def revenue_by_period(df: pd.DataFrame, freq: str = "ME") -> pd.DataFrame:
+    """Aggregate revenue by time period. freq: D/W/ME"""
     g = df.set_index("order_date").resample(freq)["revenue"].sum().reset_index()
     g.columns = ["date", "revenue"]
     return g
