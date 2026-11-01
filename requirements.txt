@@ -1,10 +1,10 @@
-# Core web framework
+# Core web framework — Python 3.11.9 compatible, pre-built wheels
 dash==2.17.1
 dash-bootstrap-components==1.6.0
 Flask==3.0.3
 gunicorn==22.0.0
 
-# Data & ML — all versions have pre-built wheels for Python 3.11.9
+# Data & ML — CPython 3.11 pre-built wheels available for all versions below
 pandas==2.2.2
 numpy==1.26.4
 scikit-learn==1.5.0
@@ -13,9 +13,9 @@ openpyxl==3.1.2
 # Visualization
 plotly==5.22.0
 
-# AI providers (optional — app runs in Demo mode without keys)
-anthropic>=0.30.0
-openai>=1.0.0
+# AI providers — optional; app runs in Demo mode without API keys
+anthropic==2.3.0
+openai>=1.0.0,<2.0
 
 # Utilities
 python-dotenv==1.0.1
