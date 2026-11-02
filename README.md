@@ -20,7 +20,7 @@ Deploy your own instance on Render in minutes — see [Deployment](#deployment) 
 | **Sales Analytics** | Daily / weekly / monthly trend charts, category & regional breakdown, channel analysis, searchable product table, CSV export |
 | **Revenue & Profit** | Revenue vs profit trends, cost analysis, anomaly detection (rolling z-score), regional profitability heatmap |
 | **Forecasting** | Ridge regression ML model vs seasonal naive baseline, WAPE governance badge, 90% prediction intervals, strict chronological train/test split |
-| **AI Analyst** | Conversational chat — Demo mode (real data, no API) and Live mode (Anthropic Claude / OpenAI GPT) |
+| **AI Analyst** | Conversational chat — Demo mode (real data, no API) and Live mode (AI-powered responses via external API) |
 | **Reports** | KPI summary, executive summary, CSV export, styled HTML report download |
 | **Data Sources** | Upload any CSV or Excel file — automatic column detection, data quality checks, downloadable sample template |
 | **Settings** | Dark / light theme, currency selector, live AI status indicator |
@@ -45,7 +45,7 @@ Deploy your own instance on Render in minutes — see [Deployment](#deployment) 
 | UI components | Dash Bootstrap Components 1.6 |
 | Data processing | pandas 2.2, NumPy 1.26 |
 | Machine learning | scikit-learn 1.5 (Ridge regression) |
-| AI integration | Anthropic Claude API, OpenAI API |
+| AI integration | External AI API (configurable via environment variables) |
 | Environment | python-dotenv |
 | Production server | Gunicorn 22 |
 | Testing | pytest 8.2 (23 tests) |

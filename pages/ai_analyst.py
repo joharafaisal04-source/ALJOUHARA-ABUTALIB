@@ -87,8 +87,8 @@ def register_callbacks(app, get_df):
                 html.Strong("VELORA AI Analyst"),
                 html.Br(),
                 dcc.Markdown(
-                    "Hello! I can answer questions about your sales data using **Live AI** "
-                    "(claude-haiku-4-5). Ask me anything about revenue, products, regions, trends, "
+                    "Hello! I can answer questions about your sales data using **Live AI mode**. "
+                    "Ask me anything about revenue, products, regions, trends, "
                     "or profitability."
                 ),
             ], className="chat-msg-ai")
