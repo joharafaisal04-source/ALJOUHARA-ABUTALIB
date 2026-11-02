@@ -52,9 +52,9 @@ max_date = str(df0["order_date"].max().date())
 
 app.layout = html.Div(
     id="app-root",
-    **{"data-theme": "dark"},
+    **{"data-theme": "light"},
     children=[
-        dcc.Store(id="theme-store", data="dark"),
+        dcc.Store(id="theme-store", data="light"),
         dcc.Store(id="sidebar-collapsed", data=False),
         dcc.Location(id="url"),
 

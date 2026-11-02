@@ -1,17 +1,17 @@
 """Shared Plotly chart theme for VELORA AI."""
 import plotly.graph_objects as go
 import plotly.io as pio
-from config import COLORS, CHART_COLORS
+from config import COLORS, DARK_COLORS, CHART_COLORS
 
 
-def apply_velora_theme(fig: go.Figure, dark: bool = True) -> go.Figure:
-    """Apply the VELORA dark/light theme to any Plotly figure."""
-    bg = COLORS["bg"] if dark else "#F1F5F9"
-    card = COLORS["card"] if dark else "#FFFFFF"
-    text = COLORS["text"] if dark else "#0F172A"
-    text2 = COLORS["text2"] if dark else "#475569"
-    border = COLORS["border"] if dark else "#CBD5E1"
-    grid = "#1E2D42" if dark else "#E2E8F0"
+def apply_velora_theme(fig: go.Figure, dark: bool = False) -> go.Figure:
+    """Apply the VELORA Ivory Premium light/dark theme to any Plotly figure."""
+    palette = DARK_COLORS if dark else COLORS
+    card = palette["card"]
+    text = palette["text"]
+    text2 = palette["text2"]
+    border = palette["border"]
+    grid = palette["border"]
 
     fig.update_layout(
         paper_bgcolor=card,
@@ -47,7 +47,7 @@ def apply_velora_theme(fig: go.Figure, dark: bool = True) -> go.Figure:
     return fig
 
 
-def line_chart(x, y, name: str = "", color: str = None, dark: bool = True) -> go.Figure:
+def line_chart(x, y, name: str = "", color: str = None, dark: bool = False) -> go.Figure:
     c = color or CHART_COLORS[0]
     fig = go.Figure(go.Scatter(
         x=x, y=y, name=name, mode="lines",
@@ -58,7 +58,7 @@ def line_chart(x, y, name: str = "", color: str = None, dark: bool = True) -> go
     return apply_velora_theme(fig, dark)
 
 
-def bar_chart(x, y, name: str = "", color: str = None, dark: bool = True) -> go.Figure:
+def bar_chart(x, y, name: str = "", color: str = None, dark: bool = False) -> go.Figure:
     c = color or CHART_COLORS[0]
     fig = go.Figure(go.Bar(x=x, y=y, name=name, marker_color=c, marker_line_width=0))
     return apply_velora_theme(fig, dark)

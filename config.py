@@ -6,40 +6,40 @@ DATA_DIR = BASE_DIR / "data"
 ASSETS_DIR = BASE_DIR / "assets"
 SAMPLE_DATA_PATH = DATA_DIR / "sample_sales.csv"
 
-# Color palette
+# Color palette — Ivory Premium (light default)
 COLORS = {
-    "bg": "#0B1020",
-    "sidebar": "#0F172A",
-    "card": "#121A2B",
-    "elevated": "#182338",
-    "accent": "#2DD4BF",
-    "accent2": "#818CF8",
-    "text": "#F8FAFC",
-    "text2": "#94A3B8",
-    "positive": "#34D399",
-    "warning": "#FBBF24",
-    "negative": "#FB7185",
-    "border": "#263449",
+    "bg": "#FAF7F2",
+    "sidebar": "#2D1F14",
+    "card": "#FFFFFF",
+    "elevated": "#F5EFE6",
+    "accent": "#B5882A",
+    "accent2": "#6B4C2A",
+    "text": "#1C1208",
+    "text2": "#6B5040",
+    "positive": "#4A7A3A",
+    "warning": "#B8691A",
+    "negative": "#9A3A2A",
+    "border": "#E8DDD0",
 }
 
-LIGHT_COLORS = {
-    "bg": "#F1F5F9",
-    "sidebar": "#E2E8F0",
-    "card": "#FFFFFF",
-    "elevated": "#F8FAFC",
-    "accent": "#0D9488",
-    "accent2": "#4F46E5",
-    "text": "#0F172A",
-    "text2": "#475569",
-    "positive": "#059669",
-    "warning": "#D97706",
-    "negative": "#E11D48",
-    "border": "#CBD5E1",
+DARK_COLORS = {
+    "bg": "#1A1108",
+    "sidebar": "#231609",
+    "card": "#2A1C0C",
+    "elevated": "#321F0E",
+    "accent": "#C8A050",
+    "accent2": "#8B6030",
+    "text": "#F5EFE6",
+    "text2": "#A8886A",
+    "positive": "#6A9E5A",
+    "warning": "#D4883A",
+    "negative": "#C06050",
+    "border": "#3D2810",
 }
 
 CHART_COLORS = [
-    "#2DD4BF", "#818CF8", "#34D399", "#FBBF24",
-    "#FB7185", "#60A5FA", "#F472B6", "#A78BFA",
+    "#B5882A", "#7A9E6E", "#4A6B8A", "#C47B3A",
+    "#8B5530", "#9A6B9A", "#4A8A6A", "#D4A050",
 ]
 
 REQUIRED_COLUMNS = [
