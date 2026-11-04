@@ -33,66 +33,28 @@ VELORA AI is a full-stack, production-ready business intelligence platform built
 ## Dashboard Preview
 
 ### 1. Overview — Executive KPIs
+![Overview](images/01_overview.jpg)
 
-![Overview Dashboard](images/01_overview.jpg)
-
-> Revenue, profit, margin & growth KPIs with AI-generated executive summary and period-over-period comparison.
-
----
-
-### 2. Sales Analytics — Trends & Breakdown
-
+### 2. Sales Analytics
 ![Sales Analytics](images/02_sales.jpg)
 
-> Daily / weekly / monthly trend charts, category & regional breakdown, channel analysis, and CSV export.
-
----
-
-### 3. Revenue & Profit — Cost Analysis
-
+### 3. Revenue & Profit
 ![Revenue & Profit](images/03_revenue.jpg)
 
-> Revenue vs profit trends, rolling z-score anomaly detection, cost breakdown, and regional profitability heatmap.
-
----
-
-### 4. Forecasting — ML Model vs Baseline
-
+### 4. Forecasting
 ![Forecasting](images/04_forecast.jpg)
 
-> Ridge regression ML model vs seasonal naive baseline, with 90% prediction intervals and WAPE governance badge.
-
----
-
-### 5. AI Analyst — Conversational Data Chat
-
+### 5. AI Analyst
 ![AI Analyst](images/05_ai_analyst.jpg)
 
-> Ask anything about your data — Demo mode uses real data with no API, Live mode connects to Anthropic or OpenAI.
-
----
-
-### 6. Reports — KPI Summary & Export
-
+### 6. Reports
 ![Reports](images/06_reports.jpg)
 
-> Executive summary, KPI snapshot, CSV export, and a styled HTML report ready to share.
-
----
-
-### 7. Data Sources — Upload Your Own Data
-
+### 7. Data Sources
 ![Data Sources](images/07_datasources.jpg)
 
-> Upload any CSV or Excel file — automatic column detection, data quality checks, and downloadable sample template.
-
----
-
-### 8. Settings — Theme & AI Configuration
-
+### 8. Settings
 ![Settings](images/08_settings.jpg)
-
-> Dark / light theme toggle, currency selector, and live AI mode status indicator.
 
 ---
 
