@@ -1,14 +1,98 @@
 # VELORA AI — Intelligence Beyond Data
 
-**VELORA AI** is an enterprise-grade, AI-powered business analytics platform combining interactive dashboards, sales intelligence, profitability analysis, machine learning forecasting, and AI-powered business insights — built entirely with Python.
+<div align="center">
 
-> Built by **Aljouhara Abutalib** as a professional data science portfolio project.
+**Enterprise-grade AI-powered business analytics platform**  
+Interactive dashboards · Sales intelligence · ML forecasting · AI analyst · Beautiful Ivory design
+
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-velora--ai.onrender.com-B5882A?style=for-the-badge&logo=render&logoColor=white)](https://velora-ai-a7ey.onrender.com)
+[![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
+[![Dash](https://img.shields.io/badge/Dash-2.17-119DFF?style=for-the-badge&logo=plotly&logoColor=white)](https://dash.plotly.com)
+[![Tests](https://img.shields.io/badge/Tests-23%20passing-2ea44f?style=for-the-badge)](tests/)
+
+> Built by **Aljouhara Abutalib** — Data Science & AI Portfolio Project
+
+</div>
 
 ---
 
-## Live Demo
+## Overview
 
-Deploy your own instance on Render in minutes — see [Deployment](#deployment) below.
+VELORA AI is a full-stack, production-ready business intelligence platform built entirely in Python. It combines interactive Plotly dashboards, machine learning forecasting, and a conversational AI analyst into a single cohesive application — deployed and running live on the web.
+
+**Key highlights:**
+- 8 fully functional pages covering the entire analytics workflow
+- Ridge regression ML model with WAPE governance and 90% prediction intervals
+- AI Analyst with Demo mode (no API key needed) and Live mode (Anthropic/OpenAI)
+- Ivory Premium design — warm beige tones with a professional dark sidebar
+- 23 pytest tests covering KPI calculations, forecast integrity, and AI responses
+- One-click deploy to Render.com on the free tier
+
+---
+
+## Dashboard Preview
+
+### 1. Overview — Executive KPIs
+
+![Overview Dashboard](images/01_overview.jpg)
+
+> Revenue, profit, margin & growth KPIs with AI-generated executive summary and period-over-period comparison.
+
+---
+
+### 2. Sales Analytics — Trends & Breakdown
+
+![Sales Analytics](images/02_sales.jpg)
+
+> Daily / weekly / monthly trend charts, category & regional breakdown, channel analysis, and CSV export.
+
+---
+
+### 3. Revenue & Profit — Cost Analysis
+
+![Revenue & Profit](images/03_revenue.jpg)
+
+> Revenue vs profit trends, rolling z-score anomaly detection, cost breakdown, and regional profitability heatmap.
+
+---
+
+### 4. Forecasting — ML Model vs Baseline
+
+![Forecasting](images/04_forecast.jpg)
+
+> Ridge regression ML model vs seasonal naive baseline, with 90% prediction intervals and WAPE governance badge.
+
+---
+
+### 5. AI Analyst — Conversational Data Chat
+
+![AI Analyst](images/05_ai_analyst.jpg)
+
+> Ask anything about your data — Demo mode uses real data with no API, Live mode connects to Anthropic or OpenAI.
+
+---
+
+### 6. Reports — KPI Summary & Export
+
+![Reports](images/06_reports.jpg)
+
+> Executive summary, KPI snapshot, CSV export, and a styled HTML report ready to share.
+
+---
+
+### 7. Data Sources — Upload Your Own Data
+
+![Data Sources](images/07_datasources.jpg)
+
+> Upload any CSV or Excel file — automatic column detection, data quality checks, and downloadable sample template.
+
+---
+
+### 8. Settings — Theme & AI Configuration
+
+![Settings](images/08_settings.jpg)
+
+> Dark / light theme toggle, currency selector, and live AI mode status indicator.
 
 ---
 
@@ -20,20 +104,14 @@ Deploy your own instance on Render in minutes — see [Deployment](#deployment) 
 | **Sales Analytics** | Daily / weekly / monthly trend charts, category & regional breakdown, channel analysis, searchable product table, CSV export |
 | **Revenue & Profit** | Revenue vs profit trends, cost analysis, anomaly detection (rolling z-score), regional profitability heatmap |
 | **Forecasting** | Ridge regression ML model vs seasonal naive baseline, WAPE governance badge, 90% prediction intervals, strict chronological train/test split |
-| **AI Analyst** | Conversational chat — Demo mode (real data, no API) and Live mode (AI-powered responses via external API) |
+| **AI Analyst** | Conversational chat — Demo mode (real data, no API) and Live mode (AI-powered via Anthropic or OpenAI) |
 | **Reports** | KPI summary, executive summary, CSV export, styled HTML report download |
 | **Data Sources** | Upload any CSV or Excel file — automatic column detection, data quality checks, downloadable sample template |
 | **Settings** | Dark / light theme, currency selector, live AI status indicator |
 
-- Responsive, dark-by-default UI
-- Fully keyboard-accessible
+- Responsive Ivory Premium UI — warm `#FAF7F2` background, `#2D1F14` sidebar, `#B5882A` gold accent
 - Light and dark theme with smooth toggle
-
----
-
-## Screenshots
-
-> Run the app locally and add screenshots here.
+- Fully keyboard-accessible
 
 ---
 
@@ -45,7 +123,7 @@ Deploy your own instance on Render in minutes — see [Deployment](#deployment) 
 | UI components | Dash Bootstrap Components 1.6 |
 | Data processing | pandas 2.2, NumPy 1.26 |
 | Machine learning | scikit-learn 1.5 (Ridge regression) |
-| AI integration | External AI API (configurable via environment variables) |
+| AI integration | External AI API (Anthropic / OpenAI, configurable) |
 | Environment | python-dotenv |
 | Production server | Gunicorn 22 |
 | Testing | pytest 8.2 (23 tests) |
@@ -84,7 +162,6 @@ Open [http://127.0.0.1:8050](http://127.0.0.1:8050) in your browser.
 The app works fully in **Demo mode** with no API key. To enable live AI responses:
 
 ```bash
-# Copy the example file
 cp .env.example .env
 ```
 
@@ -198,6 +275,15 @@ ALJOUHARA-ABUTALIB/
 │   ├── forecasting.py          # ML model, baseline, WAPE governance
 │   ├── ai_client.py            # AI Analyst — demo + live mode, key handling
 │   └── generate_data.py        # Sample data generator
+├── images/
+│   ├── 01_overview.jpg
+│   ├── 02_sales.jpg
+│   ├── 03_revenue.jpg
+│   ├── 04_forecast.jpg
+│   ├── 05_ai_analyst.jpg
+│   ├── 06_reports.jpg
+│   ├── 07_datasources.jpg
+│   └── 08_settings.jpg
 └── tests/
     └── test_metrics.py         # 23 pytest tests
 ```
