@@ -1,0 +1,8 @@
+Date,Product,Category,Region,Sales Amount,Quantity,Cost
+2024-01-01,Product A,Electronics,North,5000,10,3000
+2024-01-02,Product B,Apparel,South,2500,5,1200
+2024-01-03,Product C,Electronics,East,8000,16,4800
+2024-01-04,Product D,Home & Kitchen,West,3200,8,1900
+2024-01-05,Product E,Apparel,North,1800,4,900
+2024-01-06,Product A,Electronics,South,6500,13,3900
+2024-01-07,Product F,Education,East,4200,7,2100
