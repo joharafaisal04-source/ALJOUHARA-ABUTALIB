@@ -1,2 +1,277 @@
-# ALJOUHARA-ABUTALIB
-My Data Science and AI portfolio
+# VELORA AI — Intelligence Beyond Data
+
+<div align="center">
+
+**Enterprise-grade AI-powered business analytics platform**  
+Interactive dashboards · Sales intelligence · ML forecasting · AI analyst · Beautiful Ivory design
+
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-velora--ai.onrender.com-B5882A?style=for-the-badge&logo=render&logoColor=white)](https://velora-ai-a7ey.onrender.com)
+[![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
+[![Dash](https://img.shields.io/badge/Dash-2.17-119DFF?style=for-the-badge&logo=plotly&logoColor=white)](https://dash.plotly.com)
+[![Tests](https://img.shields.io/badge/Tests-23%20passing-2ea44f?style=for-the-badge)](tests/)
+
+> Built by **Aljouhara Abutalib** — Data Science & AI Portfolio Project
+
+</div>
+
+---
+
+## Overview
+
+VELORA AI is a full-stack, production-ready business intelligence platform built entirely in Python. It combines interactive Plotly dashboards, machine learning forecasting, and a conversational AI analyst into a single cohesive application — deployed and running live on the web.
+
+**Key highlights:**
+- 8 fully functional pages covering the entire analytics workflow
+- Ridge regression ML model with WAPE governance and 90% prediction intervals
+- AI Analyst with Demo mode (no API key needed) and Live mode (Anthropic/OpenAI)
+- Ivory Premium design — warm beige tones with a professional dark sidebar
+- 23 pytest tests covering KPI calculations, forecast integrity, and AI responses
+- One-click deploy to Render.com on the free tier
+
+---
+
+## Dashboard Preview
+
+### 1. Overview — Executive KPIs
+![Overview](images/01_overview.jpg)
+
+### 2. Sales Analytics
+![Sales Analytics](images/02_sales.jpg)
+
+### 3. Revenue & Profit
+![Revenue & Profit](images/03_revenue.jpg)
+
+### 4. Forecasting
+![Forecasting](images/04_forecast.jpg)
+
+### 5. AI Analyst
+![AI Analyst](images/05_ai_analyst.jpg)
+
+### 6. Reports
+![Reports](images/06_reports.jpg)
+
+### 7. Data Sources
+![Data Sources](images/07_datasources.jpg)
+
+### 8. Settings
+![Settings](images/08_settings.jpg)
+
+---
+
+## Features
+
+| Module | Capability |
+|---|---|
+| **Overview** | Executive KPI cards (revenue, profit, margin, orders, AOV, growth), period-over-period comparison, AI-generated executive summary |
+| **Sales Analytics** | Daily / weekly / monthly trend charts, category & regional breakdown, channel analysis, searchable product table, CSV export |
+| **Revenue & Profit** | Revenue vs profit trends, cost analysis, anomaly detection (rolling z-score), regional profitability heatmap |
+| **Forecasting** | Ridge regression ML model vs seasonal naive baseline, WAPE governance badge, 90% prediction intervals, strict chronological train/test split |
+| **AI Analyst** | Conversational chat — Demo mode (real data, no API) and Live mode (AI-powered via Anthropic or OpenAI) |
+| **Reports** | KPI summary, executive summary, CSV export, styled HTML report download |
+| **Data Sources** | Upload any CSV or Excel file — automatic column detection, data quality checks, downloadable sample template |
+| **Settings** | Dark / light theme, currency selector, live AI status indicator |
+
+- Responsive Ivory Premium UI — warm `#FAF7F2` background, `#2D1F14` sidebar, `#B5882A` gold accent
+- Light and dark theme with smooth toggle
+- Fully keyboard-accessible
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Web framework | Dash 2.17 + Plotly 5.22 |
+| UI components | Dash Bootstrap Components 1.6 |
+| Data processing | pandas 2.2, NumPy 1.26 |
+| Machine learning | scikit-learn 1.5 (Ridge regression) |
+| AI integration | External AI API (Anthropic / OpenAI, configurable) |
+| Environment | python-dotenv |
+| Production server | Gunicorn 22 |
+| Testing | pytest 8.2 (23 tests) |
+| Runtime | Python 3.11+ |
+
+---
+
+## Local Setup
+
+**Requirements:** Python 3.11+
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/joharafaisal04-source/ALJOUHARA-ABUTALIB.git
+cd ALJOUHARA-ABUTALIB
+
+# 2. Create and activate a virtual environment
+python3 -m venv .venv
+source .venv/bin/activate        # Windows: .venv\Scripts\activate
+
+# 3. Install dependencies
+pip install -r requirements.txt
+
+# 4. (Optional) Add your AI API key — see section below
+
+# 5. Run the app
+python app.py
+```
+
+Open [http://127.0.0.1:8050](http://127.0.0.1:8050) in your browser.
+
+---
+
+## AI Analyst — API Key Setup
+
+The app works fully in **Demo mode** with no API key. To enable live AI responses:
+
+```bash
+cp .env.example .env
+```
+
+Edit `.env` and add one key:
+
+```
+ANTHROPIC_API_KEY=your_anthropic_api_key_here
+# or
+OPENAI_API_KEY=your_openai_api_key_here
+```
+
+Restart the app. The **Settings** page will confirm **Live AI mode active**.
+
+> The key is loaded server-side only via environment variables. It is never displayed, logged, or sent to the browser.
+
+---
+
+## Demo Mode
+
+Without an API key the app runs in **Demo mode**:
+- All dashboards, charts, forecasting, and reports work fully
+- The AI Analyst answers questions computed directly from the loaded dataset — no external API is called
+- Demo mode is clearly labeled in the UI
+
+---
+
+## Upload Your Own Data
+
+Go to **Data Sources** and upload any CSV or Excel file.  
+The app detects your column names automatically — no specific format required.
+
+Minimum requirements:
+- One date column
+- One numeric revenue / sales / amount column
+
+Download the **sample template** from the Data Sources page for reference.
+
+---
+
+## Running Tests
+
+```bash
+source .venv/bin/activate
+pytest tests/ -v
+```
+
+23 tests covering KPI calculations, profit/margin formulas, period comparisons, data validation, forecast train/test split integrity, and demo-mode AI responses.
+
+---
+
+## Deployment
+
+### Render.com (Recommended — Free Tier)
+
+1. Fork or clone this repository to your GitHub account
+2. Go to [render.com](https://render.com) → **New +** → **Web Service**
+3. Connect your GitHub repository
+4. Use these settings:
+
+| Setting | Value |
+|---|---|
+| **Runtime** | Python 3 |
+| **Build Command** | `pip install -r requirements.txt` |
+| **Start Command** | `gunicorn app:server --bind 0.0.0.0:$PORT --workers 2 --timeout 120` |
+| **Instance Type** | Free |
+
+5. Add Environment Variable (optional — for live AI):
+
+| Key | Value |
+|---|---|
+| `ANTHROPIC_API_KEY` | your key |
+
+6. Click **Create Web Service** — deploy takes ~3–5 minutes.
+
+> The app runs in Demo mode on Render without an API key.
+
+---
+
+## Project Structure
+
+```
+ALJOUHARA-ABUTALIB/
+├── app.py                      # Entry point — routing, layout, server
+├── config.py                   # Colors, page list, column definitions
+├── requirements.txt
+├── Procfile                    # Gunicorn start command for Render
+├── .env.example                # Placeholder env vars (no real keys)
+├── .gitignore
+├── data/
+│   ├── sample_sales.csv        # Built-in demo dataset (18,000 rows, 2 years)
+│   └── velora_sample_template.xlsx  # Downloadable upload template
+├── assets/
+│   └── velora.css              # Full visual theme (dark + light)
+├── components/
+│   ├── sidebar.py              # Collapsible navigation
+│   ├── topbar.py               # Date range picker, theme toggle
+│   └── kpi_card.py             # Reusable KPI card component
+├── pages/
+│   ├── overview.py
+│   ├── sales.py
+│   ├── revenue.py
+│   ├── forecast.py
+│   ├── ai_analyst.py
+│   ├── reports.py
+│   ├── datasources.py
+│   └── settings.py
+├── services/
+│   ├── data_loader.py          # CSV/XLSX upload, validation, column mapping
+│   ├── metrics.py              # KPI engine, period comparison, formatting
+│   ├── chart_theme.py          # Shared Plotly theme (dark + light)
+│   ├── forecasting.py          # ML model, baseline, WAPE governance
+│   ├── ai_client.py            # AI Analyst — demo + live mode, key handling
+│   └── generate_data.py        # Sample data generator
+├── images/
+│   ├── 01_overview.jpg
+│   ├── 02_sales.jpg
+│   ├── 03_revenue.jpg
+│   ├── 04_forecast.jpg
+│   ├── 05_ai_analyst.jpg
+│   ├── 06_reports.jpg
+│   ├── 07_datasources.jpg
+│   └── 08_settings.jpg
+└── tests/
+    └── test_metrics.py         # 23 pytest tests
+```
+
+---
+
+## Security
+
+- API keys are loaded exclusively via environment variables (`os.getenv`)
+- `.env` is in `.gitignore` and never committed
+- `.env.example` contains placeholder values only — no real keys
+- API keys are never logged, printed, displayed, or sent to the browser
+- The app degrades gracefully to Demo mode when no key is present
+
+---
+
+## Known Limitations
+
+- Forecasting uses Ridge regression — deep seasonality may need SARIMA or Prophet
+- No persistent user settings across browser sessions (session-only state)
+- PDF export not implemented — HTML report is the formatted deliverable
+- Multi-user / authentication not included
+
+---
+
+## Author
+
+**Aljouhara Abutalib**  
+Data Science & AI — Intelligence Beyond Data
